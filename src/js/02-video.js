@@ -14,7 +14,7 @@ player.on(
   'timeupdate',
   throttle(function (data) {
     localStorage.setItem('videoplayer-current-time', data.seconds);
-    // data is an object containing properties specific to that event
+    // console.log(data);
   }, 1000)
 );
 
@@ -25,4 +25,17 @@ player
   })
   .catch(function (error) {
     console.log(error);
+    switch (error.name) {
+      case 'RangeError':
+        console.log(
+          `Error on setting current time ${localStorage.getItem(
+            'videoplayer-current-time'
+          )}. The time was less than 0 or greater than the video\'s duration`
+        );
+        break;
+
+      default:
+        console.log(`Unknown video error occured`);
+        break;
+    }
   });
