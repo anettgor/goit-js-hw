@@ -18,21 +18,16 @@ const getItemFunction = () => {
   return getItem || 0;
 };
 
-player
-  .setCurrentTime(getItemFunction())
-  .then(function (seconds) {
-    // seconds = the actual time that the player seeked to
-  })
-  .catch(function (error) {
-    switch (error.name) {
-      case 'RangeError':
-        console.log(
-          `Error on setting current time ${getItem}. The time was greater than the video\'s duration.`
-        );
-        break;
+player.setCurrentTime(getItemFunction()).catch(function (error) {
+  switch (error.name) {
+    case 'RangeError':
+      console.log(
+        `Error on setting current time ${getItem}. The time was greater than the video\'s duration.`
+      );
+      break;
 
-      default:
-        console.log(`Unknown video error occured`);
-        break;
-    }
-  });
+    default:
+      console.log(`Unknown video error occured`);
+      break;
+  }
+});
