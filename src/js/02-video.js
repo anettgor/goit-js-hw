@@ -4,11 +4,6 @@ const throttle = require('lodash.throttle');
 const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
 const localStorage = window.localStorage;
-console.log(localStorage);
-
-player.getVideoTitle().then(function (title) {
-  console.log('title:', title);
-});
 
 player.on(
   'timeupdate',
@@ -19,17 +14,20 @@ player.on(
 );
 
 const getItem = localStorage.getItem('videoplayer-current-time');
+const getItemFunction = () => {
+  return getItem || 0;
+};
+
 player
-  .setCurrentTime(getItem)
+  .setCurrentTime(getItemFunction())
   .then(function (seconds) {
     // seconds = the actual time that the player seeked to
   })
   .catch(function (error) {
-    console.log(error);
     switch (error.name) {
       case 'RangeError':
         console.log(
-          `Error on setting current time ${getItem}. The time was less than 0 or greater than the video\'s duration`
+          `Error on setting current time ${getItem}. The time was greater than the video\'s duration.`
         );
         break;
 
