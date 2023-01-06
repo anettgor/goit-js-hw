@@ -22,7 +22,7 @@ player.setCurrentTime(getItemFunction()).catch(function (error) {
   switch (error.name) {
     case 'RangeError':
       console.log(
-        `Error on setting current time ${getItem}. The time was greater than the video\'s duration.`
+        `Error on setting current time ${getItem}.\nThe time was greater than the video\'s duration.`
       );
       break;
 
