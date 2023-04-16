@@ -1,103 +1,36 @@
-# Parcel template
+# About
 
-Ten projekt został stworzony przy pomocy Parcel. W celu zapoznania się i
-skonfigurowania dodatkowych opcji [zobacz dokumentację](https://parceljs.org/)
+This repository consists of three tasks to practice different JS functions.
 
-## Przygotowanie nowego projektu
+### Task 1: Gallery
 
-1. Upewnij się, że na komputerze zainstalowana jest wersja LTS Node.js.
-   [Ściągnij i zainstaluj](https://nodejs.org/en/), jeśli jest taka potrzeba.
-2. Sklonuj to repozytorium.
-3. Zmień nazwę folderu z `parcel-project-template` na nazwę swojego projektu.
-4. Utwórz nowe, puste repozytorium na GitHub.
-5. Otwórz projekt w VSCode, uruchom terminal i zwiąż projekt z repozytorium
-   GitHub
-   [zgodnie z instrukcją](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories#changing-a-remote-repositorys-url).
-6. Utwórz zależność projektu w terminalu przez polecenie `npm install` .
-7. Włącz tryb edycji, wykonując polecenie `npm start`.
-8. Przejdź w przeglądarce pod adres
-   [http://localhost:1234](http://localhost:1234). Ta strona będzie się
-   automatycznie odświeżać po dokonaniu zmian w plikach projektu.
+This code imports SimpleLightbox package to create an image gallery. It logs an
+array of gallery items to the console and creates a list of gallery items in the
+HTML document using the imported galleryItems array. When a gallery item is
+clicked, the SimpleLightbox is triggered to display the full-sized images with
+customizable options such as captions and zooming.
 
-## Pliki i foldery
+### Task 2: Video
 
-- Wszystkie partiale plików stylów powinny znajdować się w folderze `src/sass` i
-  importować się w pliki stylów stron. Na przykład dla `index.html` plik stylów
-  nazywa się `index.scss`.
-- Obrazy dodawaj do pliku `src/images`. Moduł zbierający optymalizuje je, ale
-  tylko przy deploymencie wersji produkcyjnej projektu. Wszystko to zachodzi w
-  chmurze, aby nie obciążać twojego komputera, ponieważ na słabszym sprzęcie
-  może to zająć sporo czasu.
+The code imports Vimeo video player package and throttle function from lodash
+library to set up a Vimeo player on an HTML element with an ID of
+"vimeo-player". The player's current time is saved to the browser's localStorage
+every second, and the current time is retrieved and set to the player's current
+time if it is not null. If it is null, the player's current time is set to 0.
 
-## Deployment
+### Task 3: Feedback
 
-Aby skonfigurować deployment projektu należy wykonać kilka dodatkowych kroków
-konfigurowania twojego repozytorium. Wejdź w zakładkę `Settings` i w podsekcji
-`Actions` wybierz punkt `General`.
+This code handles user feedback form submission by saving the form state in the
+browser's localStorage. When the page is loaded, the saved form state is
+retrieved and the form fields' values are set to the saved values. When the form
+is submitted, the code prevents the default behavior, resets the form fields,
+removes the saved form state from localStorage, and logs the email and message
+values to the console. Additionally, the throttle function from the lodash
+library is used to limit the frequency of saving the email value in localStorage
+to every 500 milliseconds.
 
-![GitHub actions settings](./assets/actions-config-step-1.png)
+## Libraries
 
-Przejdź do ostatniej sekcji, w której upewnij się, że wybrane opcje są takie
-same jak na następnym obrazku i kliknij `Save`. Bez tych ustawień w module
-zbierającym będzie zbyt mało pozwoleń dla automatyzacji procesu deploymentu.
-
-![GitHub actions settings](./assets/actions-config-step-2.png)
-
-Wersja produkcyjna projektu będzie automatycznie gromadzić się i deployować na
-GitHub Pages w gałęzi `gh-pages` za każdym razem, gdy aktualizuje się gałąź
-`main`. Na przykład po bezpośrednim pushu lub przyjętym pull requeście. W tym
-celu niezbędne jest, aby w pliku `package.json` wyedytować pole `homepage` i
-skrypt `build`, zamieniając `your_username` i `your_repo_name` na swoje nazwy i
-wysłać zmiany na GitHub.
-
-```json
-"homepage": "https://your_username.github.io/your_repo_name/",
-"scripts": {
-  "build": "parcel build src/*.html --public-url /your_repo_name/"
-},
-```
-
-Dalej należy wejść w ustawienia repozytorium GitHub (`Settings` > `Pages`) i
-wystawić dystrybucję wersji produkcyjnej z folderu `/root` gałęzi `gh-pages`,
-jeśli nie zrobiło się to automatycznie.
-
-![GitHub Pages settings](./assets/repo-settings.png)
-
-### Status deploymentu
-
-Status deploymentu ostatniego commitu wyświetla się na ikonie obok jego
-identyfikatora.
-
-- ** Żółty kolor** - wykonuje się zbudowanie i deployment projektu.
-- ** Zielony kolor** - deployment zakończył się sukcesem.
-- ** Czerwony kolor** - w czasie lintingu, budowania lub deplymentu pojawił się
-  błąd.
-
-Więcej informacji o statusie można zobaczyć klikając na ikonkę i w wyskakującym
-oknie przejść do odnośnika `Details`.
-
-![Deployment status](./assets/status.png)
-
-### Działająca strona
-
-Po jakimś czasie, zazwyczaj kilku minut, działającą stronę będzie można zobaczyć
-pod adresem wskazanym w wyedytowanej właściwości `homepage`. Na przykład tu
-znajduje się odnośnik do działającej strony dla tego repozytorium
-[https://goitacademy.github.io/parcel-project-template](https://goitacademy.github.io/parcel-project-template).
-
-Jeżeli otwiera się pusta strona, upewnij się, że w zakładce `Console` nie ma
-błędów związanych z nieprawidłowymi ścieżkami do plików projektu CSS i JS
-(**404**). Najprawdopodobniej wprowadzona została nieprawidłowa wartość
-właściwości `homepage` lub skryptu `build` w pliku `package.json`.
-
-## Jak to działa
-
-![How it works](./assets/how-it-works.png)
-
-1. Po każdym pushu w gałęzi `main` repozytorium GitHub, włącza się specjalny
-   skrypt (GitHub Action) z pliku `.github/workflows/deploy.yml`.
-2. Wszystkie pliki repozytorium kopiują się na serwer, gdzie projekt
-   inicjalizuje się i buduje przed deploymentem.
-3. Jeżeli wszystkie kroki zakończyły się sukcesem, zbudowana wersja produkcyjna
-   plików projektu wysyła się w gałąź `gh-pages`. W przeciwnym razie, w logu
-   wykonania skryptu wskazane zostanie, w czym jest problem.
+- SimpleLightBox
+- Vimeo-player
+- Lodash
